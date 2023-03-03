@@ -13,7 +13,7 @@ host MLS1
 no ip domain-lookup
 ip routing
 
-!! trunks to MLS1, MLS2
+!! trunks to S1, S2
 int range fa0/2-3
     switchport trunk encapsulation dot1q
     switchport mode trunk
@@ -40,7 +40,7 @@ host MLS2
 no ip domain-lookup
 ip routing
 
-!! trunks to MLS1, MLS2
+!! trunks to S1, S2
 int range fa0/2-3
     switchport trunk encapsulation dot1q
     switchport mode trunk
@@ -73,6 +73,7 @@ int fa0/1
     switchport port-security
     switchport port-security mac-address 000B.BE71.B8BB
 
+!! trunks to MLS1, MLS2
 int range fa0/2-3
     switchport mode trunk
 
@@ -95,8 +96,11 @@ no ip domain-lookup
 
 int fa0/1
     switchport access vlan 20
+
+!! trunks to MLS1, MLS2
 int range fa0/2-3
     switchport mode trunk
+
 spanning-tree mode rapid-pvst
 spanning-tree portfast default
 end
