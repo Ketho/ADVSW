@@ -1,10 +1,10 @@
 ## interfaces
-- show int status
+- show interfaces
+- show interfaces status
 
 ## vlan
 - show vlan
 - show vlan summary
-- show interfaces
 - show interfaces fa0/1 switchport
 
 remove vlans: delete vlan table and restart routers

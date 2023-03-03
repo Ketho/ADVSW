@@ -20,6 +20,7 @@ router ospf 1
     network 192.168.0.4  0.0.0.3   area 0
     network 192.168.0.8  0.0.0.3   area 0
 end
+copy running-config startup-config
 ```
 
 ## DLS1 - 3650-24PS
@@ -28,6 +29,7 @@ en
 conf t
 host DLS1
 no ip domain-lookup
+ip routing
 
 !! routed port to R1
 int fa0/7
@@ -58,19 +60,16 @@ int port-channel 3
 
 !! inter-vlan routing
 vlan 10
-vlan 20
 int vlan 10
     ip addr 192.168.10.1 255.255.255.0
-int vlan 20
-    ip addr 192.168.20.1 255.255.255.0
-ip routing
 
 router ospf 1
     router-id 2.2.2.2
     network 192.168.0.0  0.0.0.3   area 0
     network 192.168.0.4  0.0.0.3   area 0
-    network 192.168.10.1 0.0.0.255 area 0
+    network 192.168.10.0 0.0.0.255 area 0
 end
+copy running-config startup-config
 ```
 
 ## DLS2 - 3650-24PS
@@ -79,6 +78,7 @@ en
 conf t
 host DLS2
 no ip domain-lookup
+ip routing
 
 !! routed port to R1
 int fa0/7
@@ -108,20 +108,17 @@ int port-channel 3
     switchport mode trunk
 
 !! inter-vlan routing
-vlan 10
 vlan 20
-int vlan 10
-    ip addr 192.168.10.1 255.255.255.0
 int vlan 20
     ip addr 192.168.20.1 255.255.255.0
-ip routing
 
 router ospf 1
     router-id 3.3.3.3
     network 192.168.0.8  0.0.0.3   area 0
     network 192.168.0.0  0.0.0.3   area 0
-    network 192.168.20.1 0.0.0.255 area 0
+    network 192.168.20.0 0.0.0.255 area 0
 end
+copy running-config startup-config
 ```
 
 ## ALS1 - 2960-24TT
@@ -146,6 +143,7 @@ int port-channel 2
 int fa0/7
     switchport access vlan 10
 end
+copy running-config startup-config
 ```
 
 ## ALS2 - 2960-24TT
@@ -170,8 +168,10 @@ int port-channel 2
 int fa0/7
     switchport access vlan 20
 end
+copy running-config startup-config
 ```
 
+## hosts
 PC1:
 - IP: `192.168.10.10`
 - Subnet Mask: `255.255.255.0`
